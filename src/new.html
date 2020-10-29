@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Covid-19 Pandemic | Situation Report</title>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous" />
+    <script src="https://kit.fontawesome.com/c80e87f2fb.js" crossorigin="anonymous"></script>
+  
+
+   <!-- custom css -->
+   
+   <link href="/css/Style.css" rel="stylesheet" >
+   <link href="/css/sticky-footer.css" rel="stylesheet">
+   <link rel="stylesheet" href="/css/nav-bar.css">
+
+  
+    </head>
+    <body >
+        <!-- navigation bar -->
+        <header>
+            <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light nav-bk3">
+              <a class="navbar-brand  text-light" href="/src/client.html">Covid-19 Pandemic Details</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav  mr-auto">
+                  
+                  <li class="nav-item">
+                    <a class="nav-link  text-light" href="./about.html">About</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link  text-light" href="./new.html">Situation Report</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link  text-light" href="./dashboard.html" tabindex="-1" aria-disabled="true">Map</a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </header>
+
+
+      <!-- scroll -->
+
+ <main >
+
+
+    <section class="section-2 container-fluid p-0" style="background-image: url('/img/1cd21bb18fcb193e74cfd0e434b123ea.jpg');">
+        <div class="cover">
+          <div class="content text-center">
+            <h1>COVID-19 Situation Report</h1>
+            <p>
+              This data is from <u>https://www.hpb.health.gov.lk/en</u> and upto date: <i id="date"></i>
+            </p>
+            <button type="button"  class="btn btn-danger" onclick="window.location.href='/src/newg.html'"> Global Details</button>
+          </div>
+        </div>
+        <div class="container-fluid text-center">
+          <div class="numbers d-flex flex-md-row flex-wrap justify-content-center">
+            <div class="rect">
+                <div class="icon-box"><i class="fas fa-ambulance"></i></div>
+              <h1 id="ln"></h1>
+              <p>Local New Cases</p>
+            </div>
+            <div class="rect text-center">
+                <div class="icon-box "><i class="fas fa-procedures"></i></div> 
+              <h1 id="la"></h1>
+              <p>Local Active Cases</p>
+            </div>
+            <div class="rect">
+                <div class="icon-box"><i class="fas fa-users"></i></div>
+              <h1 id="lt"></h1>
+              <p>Local Total Cases</p>
+            </div>
+            <div class="rect">
+                <div class="icon-box"><i class="fas fa-dizzy"></i></div>
+              <h1 id="ld"></h1>
+              <p>Local Deaths</p>
+            </div>
+            <div class="rect">
+                <div class="icon-box"><i class="fas fa-smile"></i></div>
+              <h1 id="lc"></h1>
+              <p>Local Recovered</p>
+            </div>
+            <div class="rect">
+                <div class="icon-box"><i class="fas fa-hospital-user"></i></div>
+              <h1 id="lh"></h1>
+              <p>Locals In Hospital</p>
+            </div>
+            <div class="rect">
+              <div class="icon-box"><i class="fas fa-vials"></i></div>
+            <h1 id="gh" style="font-size: 4rem;"></h1>
+            <p>Total Pcr Testing Count</p>
+          </div>
+          </div>
+        </div>
+
+
+<!-- footer -->
+<footer class="footer mt-auto py-2">
+  <div class="container">
+    <span class="text-light" style="display: block;text-align: center;">&#169; 2020 Copyright: Pabasara Sewwandi Kurera</span>
+  </div>
+</footer>
+  
+
+
+
+    </main>
+  <!-- api part -->
+<script>
+   var ajax=new XMLHttpRequest();
+        ajax.open('GET','https://hpb.health.gov.lk/api/get-current-statistical',false);
+        ajax.send();
+        console.log(ajax.responseText);
+        var para=document.getElementById('ln');
+        para.innerHTML=JSON.parse(ajax.responseText).data.local_new_cases;
+        var para=document.getElementById('la');
+        para.innerHTML=JSON.parse(ajax.responseText).data.local_active_cases;
+        var para=document.getElementById('lt');
+        para.innerHTML=JSON.parse(ajax.responseText).data.local_total_cases;
+        var para=document.getElementById('ld');
+        para.innerHTML=JSON.parse(ajax.responseText).data.local_deaths;
+        var para=document.getElementById('lc');
+        para.innerHTML=JSON.parse(ajax.responseText).data.local_recovered;
+        var para=document.getElementById('lh');
+        para.innerHTML=JSON.parse(ajax.responseText).data.local_total_number_of_individuals_in_hospitals;
+        var para=document.getElementById('gh');
+        para.innerHTML=JSON.parse(ajax.responseText).data.total_pcr_testing_count;
+        var para=document.getElementById('date');
+        para.innerHTML=JSON.parse(ajax.responseText).data.update_date_time;
+
+</script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+      <script src="/css/main.js"></script>
+
+</body>
+</html>
